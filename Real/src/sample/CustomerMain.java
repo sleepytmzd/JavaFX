@@ -98,7 +98,7 @@ public class CustomerMain extends Application {
 
         // Set the primary stage
         stage.setTitle("Customer cdi");
-        stage.setScene(new Scene(root, 576, 344));
+        stage.setScene(new Scene(root, 576, 3876));
         stage.show();
     }
 

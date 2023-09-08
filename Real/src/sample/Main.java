@@ -23,12 +23,14 @@ public class Main extends Application {
     public Stage getStage() {
         return stage;
     }
+    public Restaurant getRestaurant(){ return restaurant; }
 
     public NetworkUtil getNetworkUtil() {
         return networkUtil;
     }
     public void setOrder(Order order){
         this.order = order;
+        System.out.println("Order dise: " + this.order.customerName);
         shit.updateOrder(order);
     }
 
@@ -70,17 +72,17 @@ public class Main extends Application {
 
         // Loading the controller
         HomeController controller = loader.getController();
-        controller.init(restaurant.name);
-        //controller.updateOrder(order);
         controller.setMain(this);
+        controller.init(restaurant);
+        //controller.updateOrder(order);
         shit = controller;
 
         this.restaurant = restaurant;
         System.out.println(this.restaurant);
 
         // Set the primary stage
-        stage.setTitle("Home");
-        stage.setScene(new Scene(root, 631, 426));
+        stage.setTitle("Tor Restaurant");
+        stage.setScene(new Scene(root, 939, 585));
         stage.show();
     }
 

@@ -68,6 +68,44 @@ public class Restaurant implements  Serializable{
         foods.add(food);
     }
 
+    public int getId(){ return id; }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
     @Override
     public String toString(){
         String ret = "Id: " + id + "\nName: " + name + "\nScore: " + score + "\nPrice: " + price + "\nZipcode: " + zipcode + "\nCategories: ";

@@ -39,7 +39,8 @@ public class ReadThread implements Runnable {
                                 main.showAlert();
                             }
                             if(o instanceof Order){
-                                System.out.println("restaurant e order ashchee");
+                                Order order = (Order) o;
+                                System.out.println("restaurant e order ashchee, dise: " + order.customerName);
                                 main.setOrder((Order)o);
                             }
                         }
