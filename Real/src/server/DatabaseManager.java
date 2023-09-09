@@ -41,7 +41,7 @@ public class DatabaseManager implements Serializable{
 
     public void addFood(int restaurantId, String category, String name, double price){
         foodList.add(new Food(restaurantId, category, name, price));
-        restaurantList.get(restaurantId-1).addFood(new Food(restaurantId, category, name, price));
+        //restaurantList.get(restaurantId-1).addFood(new Food(restaurantId, category, name, price));
     }
 
     public void showRestaurantFoods(){

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import server.Restaurant;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class CusthomeController {
     public ListView<String> orderedFoodsList = new ListView<>();
+    public Label orderConfirmation;
     @FXML
     private ListView<String> restaurantListView = new ListView<>();
     @FXML
@@ -44,7 +46,7 @@ public class CusthomeController {
                             break;
                         }
                     }
-                    main.order.restaurantId = id;
+                    //main.order.restaurantId = id;
 
                     try {
                         main.showRestaurantMenuPage(newValue);
@@ -73,7 +75,10 @@ public class CusthomeController {
 
     public void placeOrderAction(ActionEvent actionEvent) {
         main.ordergot = true;
-        placeOrder.setText("Order Placed!");
+        //placeOrder.setText("Order Placed!");
+        AnchorPane parent = (AnchorPane) placeOrder.getParent();
+        parent.getChildren().remove(placeOrder);
+        orderConfirmation.setText("Order placed successfully!");
         try {
             main.getNetworkUtil().write(main.order);
         } catch (IOException e) {

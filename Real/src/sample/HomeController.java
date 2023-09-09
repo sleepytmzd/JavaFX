@@ -37,7 +37,6 @@ public class HomeController {
     private ObservableList<Data> menu = FXCollections.observableArrayList();
 
     private void initializeColumns(){
-        System.out.println("Inside initialize");
         TableColumn<Data, String> foodNameCol = new TableColumn<>("Name");
         foodNameCol.setMinWidth(200);
         foodNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -45,8 +44,6 @@ public class HomeController {
         TableColumn<Data, String> foodCategoryCol = new TableColumn<>("Category");
         foodCategoryCol.setMinWidth(150);
         foodCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
-
-        System.out.println("After categorycol");
 
         TableColumn<Data, String> foodPriceCol = new TableColumn<>("Price");
         foodPriceCol.setMinWidth(50);
@@ -110,11 +107,13 @@ public class HomeController {
         ObservableList<String> foodNames = FXCollections.observableArrayList();*/
         for(int i = 0; i < order.foods.size(); i++){
             Food f = order.foods.get(i);
-            orderedfoodNames.add(f.name + " ,served to: " + order.customerName);
+            //orderedfoodNames.add(f.name + " ,served to: " + order.customerName);
+            orderedfoodNames.add(f.name + " x" + order.count.get(i) + " ,served to: " + order.customerName);
 
             for(int j = 0; j < menu.size(); j++){
                 if(f.name.equals(menu.get(j).getName())){
-                    menu.get(j).incrementOrders();
+                    //menu.get(j).incrementOrders();
+                    menu.get(j).incrementOrders(order.count.get(i));
                 }
             }
         }

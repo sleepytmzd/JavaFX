@@ -9,10 +9,12 @@ public class Order implements Serializable{
     public String customerName;
     public int restaurantId;
     public List<Food> foods;
+    public List<Integer> count;
 
     public Order(){
         restaurantId = 0;
         foods = new ArrayList<>();
+        count = new ArrayList<>();
     }
 
     public void addFood(Food food){

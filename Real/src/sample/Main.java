@@ -59,7 +59,7 @@ public class Main extends Application {
         controller.setMain(this);
 
         // Set the primary stage
-        stage.setTitle("Restaurant cdi");
+        stage.setTitle("Restaurant Login");
         stage.setScene(new Scene(root, 400, 250));
         stage.show();
     }

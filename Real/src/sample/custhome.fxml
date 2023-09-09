@@ -13,7 +13,7 @@
             <Font size="19.0" />
          </font></Label>
       <Button fx:id="Logout" layoutX="499.0" layoutY="337.0" mnemonicParsing="false" onAction="#LogoutAction" text="Bair ho" />
-      <Button fx:id="placeOrder" layoutX="26.0" layoutY="337.0" mnemonicParsing="false" onAction="#placeOrderAction" text="Place Order" />
+      <Button fx:id="placeOrder" layoutX="26.0" layoutY="336.0" mnemonicParsing="false" onAction="#placeOrderAction" text="Place Order" />
       <ListView fx:id="restaurantListView" layoutX="313.0" layoutY="113.0" prefHeight="200.0" prefWidth="211.0" />
       <ListView fx:id="orderedFoodsList" layoutX="26.0" layoutY="113.0" prefHeight="200.0" prefWidth="222.0" />
       <Label layoutX="26.0" layoutY="74.0" text="Foods Ordered:">
@@ -24,5 +24,10 @@
          <font>
             <Font size="19.0" />
          </font></Label>
+      <Label fx:id="orderConfirmation" layoutX="142.0" layoutY="327.0" prefHeight="42.0" prefWidth="211.0" textAlignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

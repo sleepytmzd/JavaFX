@@ -41,9 +41,15 @@ public class Data implements Serializable{
         return orders;
     }
 
-    public void incrementOrders() {
+    public void incrementOrders(){
         int n = Integer.parseInt(orders);
         n++;
+        orders = String.valueOf(n);
+    }
+
+    public void incrementOrders(int amount) {
+        int n = Integer.parseInt(orders);
+        n = n + amount;
         orders = String.valueOf(n);
     }
 }
