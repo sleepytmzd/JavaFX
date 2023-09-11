@@ -9,12 +9,36 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import server.Food;
 
 import java.util.List;
 import java.util.Objects;
+
+class listItem{
+    public Pane pane;
+    public Label foodName;
+    public Label amount;
+    public listItem(){
+        pane = new Pane();
+        foodName = new Label();
+        amount = new Label();
+
+        pane.getChildren().add(foodName);
+        pane.getChildren().add(amount);
+
+        foodName.setFont(new Font(17));
+        amount.setFont(new Font(12));
+    }
+
+    public void setWidth(double width){
+        pane.setPrefSize(width, 50);
+        
+    }
+}
 
 public class restaurantMenuController {
     public TableView<Food> menuTable = new TableView<>();
@@ -22,6 +46,7 @@ public class restaurantMenuController {
     public TextField categoryFilter;
     public TextField priceFilterLowerBound;
     public TextField priceFilterUpperBound;
+    public ListView<String> cart = new ListView<>();
     @FXML
     private Label name;
     //@FXML
@@ -30,6 +55,7 @@ public class restaurantMenuController {
     private String restaurantName;
     private List<Food> foodMenu;
     private ObservableList<Food> foods = FXCollections.observableArrayList();
+    private ObservableList<String> cartItems = FXCollections.observableArrayList();
     private String filterName;
     private String filterCategory;
     private Double filterPriceLower;
@@ -74,6 +100,8 @@ public class restaurantMenuController {
                 }
         );*/
 
+        cart.setItems(cartItems);
+
         initializeColumns();
 
         foods.addAll(foodmenu);
@@ -86,11 +114,17 @@ public class restaurantMenuController {
                     }
                     System.out.println(newValue);
 
-                    String amount;
-                    VBox getAmount = new VBox();
+                    Pane getAmount = new Pane();
                     TextField tf = new TextField();
+                    tf.setLayoutX(85);
+                    tf.setLayoutY(0);
+                    tf.setPrefSize(100, 30);
+                    Label label = new Label("Enter amount:");
+                    label.setLayoutX(3);
+                    label.setLayoutY(7);
+                    getAmount.getChildren().add(label);
                     getAmount.getChildren().add(tf);
-                    Scene amountScene = new Scene(getAmount, 300, 200);
+                    Scene amountScene = new Scene(getAmount, 190, 45);
                     Stage amountStage = new Stage();
                     tf.setOnKeyTyped(e -> {
                         if(e.getCharacter().equals("\r")){
@@ -98,6 +132,9 @@ public class restaurantMenuController {
                             final String bal = tf.getText();
                             final int cnt = Integer.parseInt(bal);
                             main.order.count.add(cnt);
+
+                            cartItems.add(newValue.name + " ,x" + cnt);
+
                             amountStage.close();
                         }
                     });
@@ -129,7 +166,7 @@ public class restaurantMenuController {
     }
 
     private void filter(){
-        foods.clear();
+        /*foods.clear();
         for(int i = 0; i < foodMenu.size(); i++){
             if(foodMenu.get(i).name.toLowerCase().contains(filterName.toLowerCase())){
                 foods.add(foodMenu.get(i));
@@ -166,7 +203,19 @@ public class restaurantMenuController {
             }
         }
 
-        menuTable.setItems(foods);
+        menuTable.setItems(foods);*/
+
+        ObservableList<Food> temp = FXCollections.observableArrayList();
+        temp.addAll(foods);
+        foods.clear();
+
+        for(int i = 0; i < foodMenu.size(); i++){
+            Food f = foodMenu.get(i);
+            if(f.name.toLowerCase().contains(filterName.toLowerCase()) && f.category.toLowerCase().contains(filterCategory.toLowerCase()) && f.price >= filterPriceLower && f.price <= filterPriceUpper){
+                foods.add(f);
+            }
+        }
+        temp.clear();
     }
 
     public void nameEntered(KeyEvent keyEvent) {
