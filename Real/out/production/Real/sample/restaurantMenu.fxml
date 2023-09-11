@@ -2,13 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="610.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.restaurantMenuController">
+<AnchorPane prefHeight="610.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.restaurantMenuController">
    <children>
       <Button fx:id="foodDone" layoutX="38.0" layoutY="544.0" mnemonicParsing="false" onAction="#foodSelectionDoneAction" text="Done" />
       <Label fx:id="name" layoutX="131.0" layoutY="26.0" prefHeight="33.0" prefWidth="124.0" text="Label" textAlignment="CENTER">
@@ -16,9 +16,9 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <TableView fx:id="menuTable" layoutX="288.0" layoutY="92.0" prefHeight="478.0" prefWidth="500.0" />
-      <TextField fx:id="enterName" layoutX="445.0" layoutY="43.0" onKeyTyped="#nameEntered" />
-      <Label layoutX="386.0" layoutY="47.0" text="Name:" />
+      <TableView fx:id="menuTable" layoutX="322.0" layoutY="91.0" prefHeight="478.0" prefWidth="500.0" />
+      <TextField fx:id="enterName" layoutX="497.0" layoutY="43.0" onKeyTyped="#nameEntered" />
+      <Label layoutX="432.0" layoutY="47.0" text="Name:" />
       <Label layoutX="38.0" layoutY="91.0" text="Filter Options:">
          <font>
             <Font size="15.0" />
@@ -30,11 +30,15 @@
       <TextField fx:id="priceFilterLowerBound" layoutX="114.0" layoutY="188.0" onKeyTyped="#priceLowerBoundAction" promptText="Lower bound" />
       <TextField fx:id="priceFilterUpperBound" layoutX="115.0" layoutY="231.0" onKeyTyped="#priceUpperBoundAction" promptText="Upper bound" />
       <Button fx:id="backButton" layoutX="20.0" layoutY="26.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
-      <ListView fx:id="cart" layoutX="38.0" layoutY="324.0" prefHeight="200.0" prefWidth="200.0" />
       <Label layoutX="40.0" layoutY="281.0" text="Cart:">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
+      <ScrollPane fx:id="cartscroll" layoutX="38.0" layoutY="324.0" prefHeight="200.0" prefWidth="250.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

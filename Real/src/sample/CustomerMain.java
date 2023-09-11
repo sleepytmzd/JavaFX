@@ -120,7 +120,7 @@ public class CustomerMain extends Application {
         controller.init(restaurantList.get(r).name, restaurantList.get(r).getFoods());
 
         stage.setTitle("Khawon thik kor");
-        stage.setScene(new Scene(root, 820, 610));
+        stage.setScene(new Scene(root, 863, 610));
         stage.show();
     }
 
