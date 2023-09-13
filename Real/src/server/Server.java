@@ -11,7 +11,7 @@ public class Server {
 
     private ServerSocket serverSocket;
     public HashMap<String, String> userMap;
-    public HashMap<String, NetworkUtil> restaurantMap;
+    public HashMap<Integer, NetworkUtil> restaurantMap;
     public DatabaseManager dbms;
 
     Server() {
@@ -43,16 +43,14 @@ public class Server {
     }
 
     public static void main(String[] args) {
-
-
         new Server();
     }
 
-    public void addRestaurantMap(String name, NetworkUtil networkUtil){
-        restaurantMap.put(name, networkUtil);
-        System.out.println("Map e dhukseeee " + name);
+    public void addRestaurantMap(Integer id, NetworkUtil networkUtil){
+        restaurantMap.put(id, networkUtil);
+        System.out.println("Map e dhukseeee " + id);
     }
-    public NetworkUtil getRestaurantNet(String name){
-        return restaurantMap.get(name);
+    public NetworkUtil getRestaurantNet(Integer id){
+        return restaurantMap.get(id);
     }
 }

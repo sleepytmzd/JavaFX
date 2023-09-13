@@ -9,20 +9,28 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import server.Food;
 import server.Restaurant;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class CusthomeController {
-    public ListView<String> orderedFoodsList = new ListView<>();
+    //public ListView<String> orderedFoodsList = new ListView<>();
     public Label orderConfirmation;
     public Label totalPrice;
     public TextField nameFilter;
     public TextField scoreFilterLowerBound;
     public TextField scoreFilterUpperBound;
     public TextField priceFilter;
+    public ScrollPane ordersScroll = new ScrollPane();
+    public Label filteredRestaurantCount;
+    private VBox orderBox = new VBox();
     @FXML
     private TableView<Restaurant> restaurantListView = new TableView<>();
     @FXML
@@ -62,6 +70,30 @@ public class CusthomeController {
         restaurantListView.getColumns().addAll(nameCol, scoreCol, priceCol, zipcodeCol);
     }
 
+    private void addInOrder(Food foodInCart, int foodAmount){
+        Pane pane = new Pane();
+
+        Label foodName = new Label();
+        foodName.setFont(new Font(17));
+        foodName.setPrefSize(222, 30);
+        foodName.setText(foodInCart.name);
+
+        Label others = new Label();
+        others.setFont(new Font(12));
+        others.setPrefSize(222,20);
+        others.setText("Amount: " + foodAmount + "  ,Price: " + foodInCart.price);
+        others.setLayoutY(30);
+
+        Label category = new Label();
+        category.setPrefSize(222, 30);
+        category.setText("Category: " + foodInCart.category);
+        category.setLayoutY(50);
+
+        pane.getChildren().addAll(foodName, others, category);
+        orderBox.getChildren().add(pane);
+        System.out.println("order added: " + foodInCart);
+    }
+
     public void init(String customerName, List<Restaurant> restaurantList) {
         this.customerName.setText(customerName);
         this.restaurantList = restaurantList;
@@ -72,6 +104,7 @@ public class CusthomeController {
         restaurantNames.addAll(restaurantList);
         initialize_columns();
         restaurantListView.setItems(restaurantNames);
+        filteredRestaurantCount.setText("Total Restaurants: " + restaurantNames.size());
 
         restaurantListView.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
@@ -96,11 +129,17 @@ public class CusthomeController {
                 }
         );
 
-        ObservableList<String> orderedFoodNames = FXCollections.observableArrayList();
+        /*ObservableList<String> orderedFoodNames = FXCollections.observableArrayList();
         for(int i = 0; i < main.order.foods.size(); i++){
             orderedFoodNames.add(main.order.foods.get(i).name + " ,x" + main.order.count.get(i));
         }
-        orderedFoodsList.setItems(orderedFoodNames);
+        orderedFoodsList.setItems(orderedFoodNames);*/
+
+        ordersScroll.setContent(orderBox);
+        ordersScroll.setFitToWidth(true);
+        for(int i = 0; i < main.order.foods.size(); i++){
+            addInOrder(main.order.foods.get(i), main.order.count.get(i));
+        }
 
         if(main.order.foods.isEmpty()){
             totalPrice.setText("");
@@ -117,6 +156,7 @@ public class CusthomeController {
         filterPrice = "";
         filterScoreLower = 0.0;
         filterScoreUpper = Double.MAX_VALUE;
+
     }
 
     public void LogoutAction(ActionEvent actionEvent){
@@ -130,12 +170,18 @@ public class CusthomeController {
 
     public void placeOrderAction(ActionEvent actionEvent) {
         main.ordergot = true;
+        main.order.date = new Date();
         //placeOrder.setText("Order Placed!");
         AnchorPane parent = (AnchorPane) placeOrder.getParent();
         parent.getChildren().remove(placeOrder);
         orderConfirmation.setText("Order placed successfully!");
         try {
+            System.out.println("Custhome theke order pathacchi ");
+            for(int i = 0; i < main.order.foods.size(); i++){
+                System.out.println(main.order.foods.get(i));
+            }
             main.getNetworkUtil().write(main.order);
+            //main.order.clear();
         } catch (IOException e) {
             System.out.println("Order jay nai ken " + e);
             e.printStackTrace();
@@ -169,7 +215,7 @@ public class CusthomeController {
             }
             temp.clear();
         }
-
+        filteredRestaurantCount.setText("Total Restaurants: " + restaurantNames.size());
     }
     public void nameFilterAction(KeyEvent keyEvent) {
         String restaurantName = nameFilter.getText();

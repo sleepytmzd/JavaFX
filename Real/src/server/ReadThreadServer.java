@@ -29,6 +29,7 @@ public class ReadThreadServer implements Runnable {
         try {
             while (true) {
                 Object o = networkUtil.read();
+                System.out.println("New object paisi in server thread");
                 if (o != null) {
                     if (o instanceof LoginDTO) {
                         LoginDTO loginDTO = (LoginDTO) o;
@@ -40,7 +41,7 @@ public class ReadThreadServer implements Runnable {
                             int id = Integer.parseInt(loginDTO.getUserName());
                             Restaurant r = dbms.getAllRestaurants().get(id-1);
                             networkUtil.write(r);
-                            server.addRestaurantMap(r.name, networkUtil);
+                            server.addRestaurantMap(r.id, networkUtil);
                         }
 
                         else{
@@ -55,8 +56,11 @@ public class ReadThreadServer implements Runnable {
                     if(o instanceof Order){
                         System.out.println("Order aicheee");
                         Order order = (Order) o;
-                        System.out.println(order.customerName + " cdrvy " + order.foods.get(0) + " caise");
-                        NetworkUtil nu = server.getRestaurantNet(dbms.getAllRestaurants().get(order.restaurantId-1).name);
+                        System.out.println(order.customerName + " cdrvy order korse");
+                        for(int i = 0; i < order.foods.size(); i++){
+                            System.out.println(order.foods.get(i));
+                        }
+                        NetworkUtil nu = server.getRestaurantNet(order.restaurantId);
                         nu.write(order);
                     }
                 }

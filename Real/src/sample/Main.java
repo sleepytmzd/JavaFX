@@ -20,6 +20,10 @@ public class Main extends Application {
     private NetworkUtil networkUtil;
     private HomeController shit;
 
+    public Order getOrder() {
+        return order;
+    }
+
     public Stage getStage() {
         return stage;
     }
@@ -28,9 +32,13 @@ public class Main extends Application {
     public NetworkUtil getNetworkUtil() {
         return networkUtil;
     }
+
     public void setOrder(Order order){
         this.order = order;
-        System.out.println("Order dise: " + this.order.customerName);
+        System.out.println("restaurantmain e Order ashche, dise: " + this.order.customerName);
+        for(int i = 0; i < order.foods.size(); i++){
+            System.out.println(order.foods.get(i));
+        }
         shit.updateOrder(order);
     }
 
@@ -82,7 +90,7 @@ public class Main extends Application {
 
         // Set the primary stage
         stage.setTitle("Tor Restaurant");
-        stage.setScene(new Scene(root, 939, 585));
+        stage.setScene(new Scene(root, 879, 567));
         stage.show();
     }
 

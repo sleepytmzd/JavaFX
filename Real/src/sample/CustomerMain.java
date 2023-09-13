@@ -98,7 +98,7 @@ public class CustomerMain extends Application {
 
         // Set the primary stage
         stage.setTitle("Home");
-        stage.setScene(new Scene(root, 940, 450));
+        stage.setScene(new Scene(root, 940, 525));
         stage.show();
     }
 
@@ -120,7 +120,7 @@ public class CustomerMain extends Application {
         controller.init(restaurantList.get(r).name, restaurantList.get(r).getFoods());
 
         stage.setTitle("Khawon thik kor");
-        stage.setScene(new Scene(root, 863, 610));
+        stage.setScene(new Scene(root, 863, 657));
         stage.show();
     }
 

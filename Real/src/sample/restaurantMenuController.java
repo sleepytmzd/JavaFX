@@ -52,6 +52,7 @@ public class restaurantMenuController {
     public TextField categoryFilter;
     public TextField priceFilterLowerBound;
     public TextField priceFilterUpperBound;
+    public Label filteredFoodsCount;
     private VBox cartbox = new VBox();
     public ScrollPane cartscroll = new ScrollPane();
     //@FXML
@@ -91,6 +92,11 @@ public class restaurantMenuController {
         main.order.foods.remove(foodToRemove);
         main.order.count.remove(amountToRemoveIdx);
         cartbox.getChildren().remove(amountToRemoveIdx);
+
+        System.out.println("In removeFromCart, " + main.order.foods.size() + " " + main.order.count.size());
+        for(int i = 0; i < main.order.foods.size(); i++){
+            System.out.println(main.order.foods.get(i));
+        }
     }
     private void addInCart(Food food, int cnt){
         Pane pane = new Pane();
@@ -175,6 +181,11 @@ public class restaurantMenuController {
             removeStage.setTitle("Remove");
             removeStage.show();
         });
+
+        System.out.println("In addInCart, " + main.order.foods.size() + " " + main.order.count.size());
+        for(int i = 0; i < main.order.foods.size(); i++){
+            System.out.println(main.order.foods.get(i));
+        }
     }
 
     public void init(String restaurantName, List<Food> foodmenu){
@@ -206,12 +217,19 @@ public class restaurantMenuController {
 
         cartscroll.setContent(cartbox);
         cartscroll.setFitToWidth(true);
+        if(!main.order.foods.isEmpty()) {
+            for(int i = 0; i < main.order.foods.size(); i++){
+                addInCart(main.order.foods.get(i), main.order.count.get(i));
+            }
+        }
+
         //cartscroll.setPrefViewportHeight(200);
 
         initializeColumns();
 
         foods.addAll(foodmenu);
         menuTable.setItems(foods);
+        filteredFoodsCount.setText("Available Foods: " + foods.size());
         menuTable.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
                     if(newValue == null){
@@ -323,6 +341,7 @@ public class restaurantMenuController {
             }
         }
         temp.clear();
+        filteredFoodsCount.setText("Available Foods: " + foods.size());
     }
 
     public void nameEntered(KeyEvent keyEvent) {
