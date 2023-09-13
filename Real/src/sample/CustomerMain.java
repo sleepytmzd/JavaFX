@@ -66,12 +66,13 @@ public class CustomerMain extends Application {
         // Loading the controller
         enterController controller = loader.getController();
         controller.setMain(this);
+        controller.init();
 
         order = new Order();
 
         // Set the primary stage
-        stage.setTitle("Naam de");
-        stage.setScene(new Scene(root, 434, 303));
+        stage.setTitle("Customer Entry");
+        stage.setScene(new Scene(root, 719, 343));
         stage.show();
     }
 
@@ -119,7 +120,7 @@ public class CustomerMain extends Application {
         controller.setMain(this);
         controller.init(restaurantList.get(r).name, restaurantList.get(r).getFoods());
 
-        stage.setTitle("Khawon thik kor");
+        stage.setTitle("Restaurant Menu");
         stage.setScene(new Scene(root, 863, 657));
         stage.show();
     }

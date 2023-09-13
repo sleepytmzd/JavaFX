@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -118,6 +119,7 @@ public class HomeController {
         newOrder.setText("");
 
         orderPage = new Button("Orders");
+        orderPage.setEffect(new DropShadow());
         orderPage.setLayoutX(706);
         orderPage.setLayoutY(140);
         orderPage.setOnAction( e_order ->{

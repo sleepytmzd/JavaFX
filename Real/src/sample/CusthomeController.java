@@ -95,7 +95,7 @@ public class CusthomeController {
     }
 
     public void init(String customerName, List<Restaurant> restaurantList) {
-        this.customerName.setText(customerName);
+        this.customerName.setText("Welcome, " + customerName);
         this.restaurantList = restaurantList;
 
         /*for(int i = 0; i < restaurantList.size(); i++){

@@ -5,16 +5,27 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="525.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CusthomeController">
    <children>
-      <Label fx:id="customerName" layoutX="26.0" layoutY="28.0" prefHeight="33.0" prefWidth="86.0" text="Label">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d9d7d2" height="525.0" layoutX="685.0" layoutY="-1.0" opacity="0.74" stroke="WHITE" strokeType="INSIDE" width="254.0" />
+      <Label fx:id="customerName" layoutX="324.0" layoutY="14.0" prefHeight="40.0" prefWidth="292.0" text="bleh" textAlignment="CENTER">
          <font>
-            <Font size="19.0" />
-         </font></Label>
-      <Button fx:id="Logout" layoutX="862.0" layoutY="458.0" mnemonicParsing="false" onAction="#LogoutAction" text="Bair ho" />
+            <Font name="System Bold Italic" size="28.0" />
+         </font>
+         <effect>
+            <Glow level="0.51" />
+         </effect></Label>
+      <Button fx:id="Logout" layoutX="862.0" layoutY="458.0" mnemonicParsing="false" onAction="#LogoutAction" text="Logout">
+         <effect>
+            <DropShadow />
+         </effect></Button>
       <Label layoutX="26.0" layoutY="74.0" text="Foods Ordered:">
          <font>
             <Font size="19.0" />
@@ -33,7 +44,10 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <TableView fx:id="restaurantListView" layoutX="276.0" layoutY="113.0" prefHeight="371.0" prefWidth="400.0" />
+      <TableView fx:id="restaurantListView" layoutX="276.0" layoutY="113.0" prefHeight="371.0" prefWidth="400.0">
+         <effect>
+            <DropShadow />
+         </effect></TableView>
       <Label layoutX="690.0" layoutY="113.0" text="Filter options:">
          <font>
             <Font size="15.0" />
@@ -50,12 +64,21 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>
+         <effect>
+            <DropShadow />
+         </effect>
       </ScrollPane>
       <Label fx:id="filteredRestaurantCount" layoutX="690.0" layoutY="374.0" text="Label">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Button fx:id="placeOrder" layoutX="26.0" layoutY="458.0" mnemonicParsing="false" onAction="#placeOrderAction" text="Place Order" />
+      <Button fx:id="placeOrder" layoutX="26.0" layoutY="458.0" mnemonicParsing="false" onAction="#placeOrderAction" text="Place Order">
+         <effect>
+            <DropShadow />
+         </effect></Button>
    </children>
+   <effect>
+      <Blend />
+   </effect>
 </AnchorPane>

@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import util.LoginDTO;
 
 import java.io.IOException;
@@ -12,6 +14,7 @@ import java.io.IOException;
 
 public class LoginController {
 
+    public ImageView image;
     private Main main;
 
     @FXML
@@ -46,6 +49,10 @@ public class LoginController {
         passwordText.setText(null);
     }
 
+    public void init(){
+        Image img = new Image(Main.class.getResourceAsStream("Logo.png"));
+        image.setImage(img);
+    }
     void setMain(Main main) {
         this.main = main;
     }

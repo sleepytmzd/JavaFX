@@ -18,7 +18,7 @@ public class Main extends Application {
     private Order order;
     private Stage stage;
     private NetworkUtil networkUtil;
-    private HomeController shit;
+    private HomeController updater;
 
     public Order getOrder() {
         return order;
@@ -39,7 +39,7 @@ public class Main extends Application {
         for(int i = 0; i < order.foods.size(); i++){
             System.out.println(order.foods.get(i));
         }
-        shit.updateOrder(order);
+        updater.updateOrder(order);
     }
 
     @Override
@@ -65,10 +65,11 @@ public class Main extends Application {
         // Loading the controller
         LoginController controller = loader.getController();
         controller.setMain(this);
+        controller.init();
 
         // Set the primary stage
         stage.setTitle("Restaurant Login");
-        stage.setScene(new Scene(root, 400, 250));
+        stage.setScene(new Scene(root, 809, 343));
         stage.show();
     }
 
@@ -83,13 +84,13 @@ public class Main extends Application {
         controller.setMain(this);
         controller.init(restaurant);
         //controller.updateOrder(order);
-        shit = controller;
+        updater = controller;
 
         this.restaurant = restaurant;
         System.out.println(this.restaurant);
 
         // Set the primary stage
-        stage.setTitle("Tor Restaurant");
+        stage.setTitle("Home");
         stage.setScene(new Scene(root, 879, 567));
         stage.show();
     }

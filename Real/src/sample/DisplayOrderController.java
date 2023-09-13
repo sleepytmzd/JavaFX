@@ -6,6 +6,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import server.Food;
 import util.Order;
 
@@ -26,7 +27,7 @@ public class DisplayOrderController {
         Pane header = new Pane();
 
         Label nameLabel = new Label();
-        nameLabel.setFont(new Font(19));
+        nameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 19));
         nameLabel.setPrefSize(400, 40);
         nameLabel.setText("Customer: " + order.customerName);
 
@@ -94,7 +95,10 @@ public class DisplayOrderController {
             orderPanes[i] = addOrder(allOrders.get(i));
 
         }
-        orderBox.getChildren().addAll(orderPanes);
+        //orderBox.getChildren().addAll(orderPanes);
+        for(int i = 0; i < allOrders.size(); i++){
+            orderBox.getChildren().add(0, orderPanes[i]);
+        }
         orderCount.setText("Total orders: " + allOrders.size());
     }
 }

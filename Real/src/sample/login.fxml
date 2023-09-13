@@ -5,19 +5,35 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginController">
+<AnchorPane prefHeight="343.0" prefWidth="809.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginController">
    <children>
-      <Label layoutX="74.0" layoutY="63.0" text="Restaurant ID:" />
-      <Label layoutX="74.0" layoutY="125.0" text="Password" />
-      <TextField fx:id="userText" layoutX="169.0" layoutY="58.0" />
-      <PasswordField fx:id="passwordText" layoutX="169.0" layoutY="120.0" />
-      <ButtonBar layoutX="137.0" layoutY="193.0" prefHeight="40.0" prefWidth="200.0">
+      <Label layoutX="471.0" layoutY="144.0" text="Restaurant ID:">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label layoutX="500.0" layoutY="215.0" text="Password">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <TextField fx:id="userText" layoutX="616.0" layoutY="142.0" />
+      <PasswordField fx:id="passwordText" layoutX="616.0" layoutY="213.0" />
+      <ButtonBar layoutX="573.0" layoutY="272.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetAction" text="Reset" />
-            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginAction" text="Login" />
+          <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetAction" text="Reset">
+               <effect>
+                  <DropShadow />
+               </effect></Button>
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginAction" text="Login">
+               <effect>
+                  <DropShadow />
+               </effect></Button>
         </buttons>
       </ButtonBar>
+      <ImageView fx:id="image" fitHeight="343.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

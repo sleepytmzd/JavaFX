@@ -5,18 +5,27 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="657.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.restaurantMenuController">
    <children>
-      <Button fx:id="foodDone" layoutX="37.0" layoutY="601.0" mnemonicParsing="false" onAction="#foodSelectionDoneAction" text="Done" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dde2e7" height="660.0" layoutX="-4.0" layoutY="-1.0" stroke="WHITE" strokeType="INSIDE" width="324.0" />
+      <Button fx:id="foodDone" layoutX="37.0" layoutY="601.0" mnemonicParsing="false" onAction="#foodSelectionDoneAction" text="Done">
+         <effect>
+            <DropShadow />
+         </effect></Button>
       <Label fx:id="name" layoutX="131.0" layoutY="26.0" prefHeight="33.0" prefWidth="124.0" text="Label" textAlignment="CENTER">
          <font>
-            <Font size="23.0" />
+            <Font name="System Bold Italic" size="23.0" />
          </font>
       </Label>
-      <TableView fx:id="menuTable" layoutX="322.0" layoutY="91.0" prefHeight="478.0" prefWidth="500.0" />
+      <TableView fx:id="menuTable" layoutX="322.0" layoutY="91.0" prefHeight="478.0" prefWidth="500.0">
+         <effect>
+            <DropShadow />
+         </effect></TableView>
       <TextField fx:id="enterName" layoutX="497.0" layoutY="43.0" onKeyTyped="#nameEntered" promptText="Enter Food name" />
       <Label layoutX="432.0" layoutY="47.0" text="Name:" />
       <Label layoutX="38.0" layoutY="91.0" text="Filter Options:">
@@ -29,7 +38,10 @@
       <TextField fx:id="categoryFilter" layoutX="113.0" layoutY="137.0" onKeyTyped="#categoryFilterAction" promptText="Enter Category" />
       <TextField fx:id="priceFilterLowerBound" layoutX="114.0" layoutY="188.0" onKeyTyped="#priceLowerBoundAction" promptText="Lower bound" />
       <TextField fx:id="priceFilterUpperBound" layoutX="115.0" layoutY="231.0" onKeyTyped="#priceUpperBoundAction" promptText="Upper bound" />
-      <Button fx:id="backButton" layoutX="20.0" layoutY="26.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+      <Button fx:id="backButton" layoutX="20.0" layoutY="26.0" mnemonicParsing="false" onAction="#goBack" text="Back">
+         <effect>
+            <DropShadow />
+         </effect></Button>
       <Label layoutX="37.0" layoutY="329.0" text="Cart:">
          <font>
             <Font size="19.0" />
@@ -39,6 +51,9 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>
+         <effect>
+            <DropShadow />
+         </effect>
       </ScrollPane>
       <Label fx:id="filteredFoodsCount" layoutX="37.0" layoutY="280.0" text="Available Foods:">
          <font>

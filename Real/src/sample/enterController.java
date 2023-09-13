@@ -5,8 +5,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class enterController {
+    public ImageView image;
     @FXML
     private TextField Name;
     @FXML
@@ -25,4 +28,9 @@ public class enterController {
     }
 
     void setMain(CustomerMain main){this.main = main;}
+
+    public void init(){
+        Image img = new Image(Main.class.getResourceAsStream("Logo.png"));
+        image.setImage(img);
+    }
 }
