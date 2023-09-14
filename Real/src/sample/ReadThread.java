@@ -41,9 +41,6 @@ public class ReadThread implements Runnable {
                             if(o instanceof Order){
                                 Order order = (Order) o;
                                 System.out.println("restaurantthread e order ashchee, dise: " + order.customerName);
-                                for(int i = 0; i < order.foods.size(); i++){
-                                    System.out.println(order.foods.get(i));
-                                }
                                 main.setOrder((Order)o);
                             }
                         }

@@ -13,6 +13,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import server.Food;
 import server.Restaurant;
@@ -34,6 +35,8 @@ public class HomeController {
     @FXML
     private ListView<String> orderList = new ListView<>();
     private List<Order> allOrders = new ArrayList<>();
+    public List<Pane> pendingOrderPanes = new ArrayList<>();
+    public List<Pane> confirmedOrderPanes = new ArrayList<>();
     private Main main;
 
     @FXML
@@ -73,10 +76,10 @@ public class HomeController {
         Parent parent = loader.load();
 
         DisplayOrderController controller = loader.getController();
-        controller.init(allOrders);
+        controller.init(allOrders, pendingOrderPanes, confirmedOrderPanes);
 
         Stage displayOrderStage = new Stage();
-        Scene displayOrderScene = new Scene(parent, 574, 500);
+        Scene displayOrderScene = new Scene(parent, 949, 522);
         displayOrderStage.setTitle("Orders");
         displayOrderStage.setScene(displayOrderScene);
         displayOrderStage.show();
@@ -138,19 +141,6 @@ public class HomeController {
     }
 
     public void updateOrder(Order order){
-        /*if(this.order == null){
-            this.order = order;
-        }
-        //this.order = order;
-        /*for(int i = 0; i < order.foods.size(); i++){
-            this.order.foods.add(order.foods.get(i));
-        }*/
-        /*else {
-            this.order.foods.addAll(order.foods);
-            this.order.restaurantId = order.restaurantId;
-            this.order.customerName = order.customerName;
-        }
-        ObservableList<String> foodNames = FXCollections.observableArrayList();*/
         allOrders.add(order);
         orderedfoodNames.clear();
         for(int i = 0; i < order.foods.size(); i++){
@@ -168,9 +158,6 @@ public class HomeController {
         orderList.setItems(orderedfoodNames);
         menuTable.setItems(menu);
         System.out.println("Update korsi to");
-
-        //Date date = new Date();
-        //Button orderPage = new Button("New Order recieved!");
 
         orderPage.setText("Check Orders");
         orderPage.setLayoutX(706);

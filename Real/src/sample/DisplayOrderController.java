@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
@@ -10,18 +12,30 @@ import javafx.scene.text.FontWeight;
 import server.Food;
 import util.Order;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class DisplayOrderController {
 
     @FXML
+    private Label pendingOrdersCount;
+    @FXML
+    private Label confirmedOrdersCount;
+    @FXML
+    private ScrollPane confirmedOrderScroll;
+    @FXML
     private Label orderCount;
     @FXML
-    private ScrollPane orderScroll;
+    private ScrollPane pendingOrderScroll;
 
     private Main main;
     private List<Order> allOrders;
+    private List<Pane> confirmedOrderPanes;
+    private List<Pane> pendingOrderPanes;
+    private VBox pendingOrderBox = new VBox();
+    private VBox confirmedOrderBox = new VBox();
+
 
     private Pane setHeader(Order order){
         Pane header = new Pane();
@@ -38,7 +52,8 @@ public class DisplayOrderController {
         dateLabel.setText("Timestamp: " + order.date.toString());
 
         header.setPrefSize(400, 60);
-        header.getChildren().addAll(nameLabel, dateLabel);
+        header.getChildren().add(nameLabel);
+        header.getChildren().add(dateLabel);
 
         return header;
     }
@@ -84,21 +99,51 @@ public class DisplayOrderController {
         return orderPane;
     }
 
-    public void init(List<Order> allOrders){
+    public void init(List<Order> allOrders, List<Pane> pendingOrderPanes, List<Pane> confirmedOrderPanes){
         this.allOrders = allOrders;
+        this.pendingOrderPanes = pendingOrderPanes;
+        this.confirmedOrderPanes = confirmedOrderPanes;
 
-        VBox orderBox = new VBox();
-        orderScroll.setContent(orderBox);
-        orderScroll.setFitToWidth(true);
-        Pane[] orderPanes = new Pane[allOrders.size()];
-        for(int i = 0; i < allOrders.size(); i++){
-            orderPanes[i] = addOrder(allOrders.get(i));
+        pendingOrderScroll.setContent(pendingOrderBox);
+        pendingOrderScroll.setFitToWidth(true);
 
+        confirmedOrderScroll.setContent(confirmedOrderBox);
+        confirmedOrderScroll.setFitToWidth(true);
+
+        //Pane[] orderPanes = new Pane[allOrders.size()];
+
+        if(pendingOrderPanes.size() + confirmedOrderPanes.size() != allOrders.size()) {
+            //List<Pane> orderPanes = new ArrayList<>();
+            for (int i = pendingOrderPanes.size() + confirmedOrderPanes.size(); i < allOrders.size(); i++) {
+
+                Pane tempOrderPane = addOrder(allOrders.get(i));
+                pendingOrderPanes.add(tempOrderPane);
+                tempOrderPane.setOnMouseClicked(e -> {
+                    //confirmedOrders.add(allOrders.get(i));
+                    //orderConfirmation(tempOrderPane, confirmedOrderBox);
+                    pendingOrderPanes.remove(tempOrderPane);
+                    pendingOrderBox.getChildren().remove(tempOrderPane);
+                    confirmedOrderPanes.add(tempOrderPane);
+                    confirmedOrderBox.getChildren().add(tempOrderPane);
+                    confirmedOrderScroll.setVvalue(1.0);
+
+                    pendingOrdersCount.setText("Pending orders: (" + pendingOrderPanes.size() + ")");
+                    confirmedOrdersCount.setText("Confirmed orders : (" + confirmedOrderPanes.size() + ")");
+                });
+            }
         }
         //orderBox.getChildren().addAll(orderPanes);
-        for(int i = 0; i < allOrders.size(); i++){
-            orderBox.getChildren().add(0, orderPanes[i]);
+
+        for (int i = 0; i < pendingOrderPanes.size(); i++) {
+            pendingOrderBox.getChildren().add(0, pendingOrderPanes.get(i));
         }
-        orderCount.setText("Total orders: " + allOrders.size());
+
+        for(int i = 0; i < confirmedOrderPanes.size(); i++){
+            confirmedOrderBox.getChildren().add(confirmedOrderPanes.get(i));
+        }
+
+        orderCount.setText("Total order count: " + allOrders.size());
+        pendingOrdersCount.setText("Pending orders: (" + pendingOrderPanes.size() + ")");
+        confirmedOrdersCount.setText("Confirmed orders : (" + confirmedOrderPanes.size() + ")");
     }
 }

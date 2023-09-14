@@ -35,7 +35,6 @@ public class ReadThreadServer implements Runnable {
                         LoginDTO loginDTO = (LoginDTO) o;
                         String password = userMap.get(loginDTO.getUserName());
                         loginDTO.setStatus(loginDTO.getPassword().equals(password));
-                        //networkUtil.write(loginDTO);
 
                         if(loginDTO.isStatus()){
                             int id = Integer.parseInt(loginDTO.getUserName());
@@ -49,17 +48,14 @@ public class ReadThreadServer implements Runnable {
                         }
                     }
                     if(o instanceof String){
-                        System.out.println("Customer aiche");
+                        System.out.println("Customer ashche");
                         networkUtil.write(o);
                         networkUtil.write(dbms.getAllRestaurants());
                     }
                     if(o instanceof Order){
-                        System.out.println("Order aicheee");
+                        System.out.println("Order ashcheee");
                         Order order = (Order) o;
-                        System.out.println(order.customerName + " cdrvy order korse");
-                        for(int i = 0; i < order.foods.size(); i++){
-                            System.out.println(order.foods.get(i));
-                        }
+                        System.out.println(order.customerName + " order korse");
                         NetworkUtil nu = server.getRestaurantNet(order.restaurantId);
                         nu.write(order);
                     }

@@ -4,33 +4,11 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DisplayOrderController">
+<AnchorPane prefHeight="522.0" prefWidth="949.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DisplayOrderController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="500.0" stroke="BLACK" strokeType="INSIDE" width="574.0">
-         <fill>
-            <RadialGradient centerX="0.4955947388636383" centerY="0.4469697114193078" focusDistance="0.036697212709199345" radius="0.4357797902658445">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </Stop>
-               </stops>
-            </RadialGradient>
-         </fill>
-      </Rectangle>
-      <ScrollPane fx:id="orderScroll" layoutX="87.0" layoutY="48.0" prefHeight="356.0" prefWidth="400.0">
+      <ScrollPane fx:id="pendingOrderScroll" layoutX="35.0" layoutY="83.0" prefHeight="356.0" prefWidth="400.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>
@@ -38,7 +16,25 @@
             <DropShadow />
          </effect>
       </ScrollPane>
-      <Label fx:id="orderCount" layoutX="87.0" layoutY="424.0" text="Total orders:">
+      <Label fx:id="orderCount" layoutX="401.0" layoutY="460.0" text="Total orders:">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <ScrollPane fx:id="confirmedOrderScroll" layoutX="490.0" layoutY="83.0" prefHeight="356.0" prefWidth="400.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ScrollPane>
+      <Label fx:id="pendingOrdersCount" layoutX="35.0" layoutY="37.0" text="Label">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="confirmedOrdersCount" layoutX="490.0" layoutY="43.0" text="Label">
          <font>
             <Font size="19.0" />
          </font>
