@@ -321,6 +321,7 @@
 1,Sides,Mac and Cheese,3.83
 1,Sides,Gravy,3.59
 1,Sides,2 Biscuits,2.15
+1,World Famous Buckets,Chicken Rick Astley,420.0
 2,Sides,Crispy Breakfast Potatoes,3.59
 2,Sides,Crispy Potato Pancakes,5.99
 2,Sides,Sharp Cheddar Mac and Cheese,4.79

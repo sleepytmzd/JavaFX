@@ -124,6 +124,10 @@ public class CustomerMain extends Application {
         stage.setScene(new Scene(root, 863, 657));
         stage.show();
     }
+    public void rickroll(){
+        String videoURL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        getHostServices().showDocument(videoURL);
+    }
 
     public static void main(String[] args) {
         // This will launch the JavaFX application

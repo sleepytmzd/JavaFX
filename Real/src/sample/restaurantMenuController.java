@@ -19,33 +19,6 @@ import server.Food;
 import java.util.List;
 import java.util.Objects;
 
-class listItem extends Node {
-    public Pane pane;
-    public Label foodName;
-    public Label amount;
-    public listItem(){
-        pane = new Pane();
-        foodName = new Label();
-        amount = new Label();
-
-        pane.getChildren().add(foodName);
-        pane.getChildren().add(amount);
-
-        pane.setPrefSize(250,50);
-        foodName.setFont(new Font(17));
-        foodName.setPrefSize(150, 50);
-        amount.setFont(new Font(12));
-        amount.setPrefSize(75, 50);
-    }
-
-    public void setFoodName(String name){
-        foodName.setText(name);
-    }
-    public void setAmount(int amount) {
-        this.amount.setText(String.valueOf(amount));
-    }
-}
-
 public class restaurantMenuController {
     public TableView<Food> menuTable = new TableView<>();
     public TextField enterName;
@@ -94,9 +67,6 @@ public class restaurantMenuController {
         cartbox.getChildren().remove(amountToRemoveIdx);
 
         System.out.println("In removeFromCart, " + main.order.foods.size() + " " + main.order.count.size());
-        for(int i = 0; i < main.order.foods.size(); i++){
-            System.out.println(main.order.foods.get(i));
-        }
     }
     private void addInCart(Food food, int cnt){
         Pane pane = new Pane();
@@ -183,37 +153,12 @@ public class restaurantMenuController {
         });
 
         System.out.println("In addInCart, " + main.order.foods.size() + " " + main.order.count.size());
-        for(int i = 0; i < main.order.foods.size(); i++){
-            System.out.println(main.order.foods.get(i));
-        }
     }
 
     public void init(String restaurantName, List<Food> foodmenu){
         this.restaurantName = restaurantName;
         name.setText(this.restaurantName);
         this.foodMenu = foodmenu;
-
-        /*ObservableList<String> foodNames = FXCollections.observableArrayList();
-        for(int i = 0; i < foodmenu.size(); i++){
-            foodNames.add(foodmenu.get(i).name);
-        }
-        foodMenu.setItems(foodNames);
-        foodMenu.getSelectionModel().selectedItemProperty().addListener(
-                (observableValue, oldValue, newValue) -> {
-                    int f = 0;
-                    for(int i = 0; i < foodmenu.size(); i++){
-                        if(newValue.equals(foodmenu.get(i).name)){
-                            f = i;
-                            break;
-                        }
-                    }
-                    main.order.addFood(foodmenu.get(f));
-                }
-        );*/
-
-        //cart.setItems(cartItems);
-        //box.setPrefSize(250,200);
-        //box.setMaxHeight(200);
 
         cartscroll.setContent(cartbox);
         cartscroll.setFitToWidth(true);
@@ -223,8 +168,6 @@ public class restaurantMenuController {
             }
         }
 
-        //cartscroll.setPrefViewportHeight(200);
-
         initializeColumns();
 
         foods.addAll(foodmenu);
@@ -233,7 +176,10 @@ public class restaurantMenuController {
         menuTable.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
                     if(newValue == null){
-                        //newValue = oldValue;
+                        return;
+                    }
+                    if(newValue.getName().equals("Chicken Rick Astley")){
+                        main.rickroll();
                         return;
                     }
                     System.out.println(newValue);
@@ -258,7 +204,6 @@ public class restaurantMenuController {
                             main.order.count.add(cnt);
 
                             addInCart(newValue, cnt);
-                            //cartItems.add(newValue.name + " ,x" + cnt);
 
                             amountStage.close();
                         }
@@ -291,45 +236,6 @@ public class restaurantMenuController {
     }
 
     private void filter(){
-        /*foods.clear();
-        for(int i = 0; i < foodMenu.size(); i++){
-            if(foodMenu.get(i).name.toLowerCase().contains(filterName.toLowerCase())){
-                foods.add(foodMenu.get(i));
-            }
-        }
-
-        ObservableList<Food> temp = FXCollections.observableArrayList();
-        temp.addAll(foods);
-        foods.clear();
-
-        for(int i = 0; i < temp.size(); i++){
-            if(temp.get(i).category.toLowerCase().contains(filterCategory.toLowerCase())){
-                foods.add(temp.get(i));
-            }
-        }
-        temp.clear();
-
-        temp.addAll(foods);
-        foods.clear();
-
-        for(int i = 0; i < temp.size(); i++){
-            if(temp.get(i).price >= filterPriceLower){
-                foods.add(temp.get(i));
-            }
-        }
-        temp.clear();
-
-        temp.addAll(foods);
-        foods.clear();
-
-        for(int i = 0; i < temp.size(); i++){
-            if(temp.get(i).price <= filterPriceUpper){
-                foods.add(temp.get(i));
-            }
-        }
-
-        menuTable.setItems(foods);*/
-
         ObservableList<Food> temp = FXCollections.observableArrayList();
         temp.addAll(foods);
         foods.clear();
@@ -345,26 +251,12 @@ public class restaurantMenuController {
     }
 
     public void nameEntered(KeyEvent keyEvent) {
-        if(keyEvent.getCharacter().equals("\r")){
-            System.out.println("Enter chap aicheee");
-        }
         String foodName = enterName.getText();
         if(foodName == null){
             System.out.println("null name paisi");
             foodName = "";
         }
         System.out.println(foodName);
-
-        /*ObservableList<Food> temp = FXCollections.observableArrayList();
-        temp.addAll(foods);
-
-        foods.clear();
-        for(int i = 0; i < temp.size(); i++){
-            if(temp.get(i).name.toLowerCase().contains(foodName.toLowerCase())){
-                foods.add(temp.get(i));
-            }
-        }
-        menuTable.setItems(foods);*/
 
         filterName = foodName;
         filter();
